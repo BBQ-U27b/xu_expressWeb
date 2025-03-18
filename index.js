@@ -1,22 +1,23 @@
 const express = require('express');
 const db =require('./lib/database.js');
-const app = express()
+const app = express();
 
 
 
 
-app.get('/hallo', (req, res) => {
+app.get('/api/getUserById', (req, res) => {
 
-    db.query('SELECT * FROM Mitarbeiter WHERE id = ?', [req.query.id], (err, resp, fields) => {
-    res.send(resp)
+    db.query('SELECT * FROM Mitarbeiter WHERE id = ?', [req.query.id], (err,result) => {
+    res.send(result);
 });
 });
 
-app.post('/hallo', (req, res) =>{
-    console.log(req.body)
-    res.send('Bye')
-})
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+
 
 app.listen(8000,() => {
-    console.log('HTTP Server starting')
-})
+    console.log('HTTP Server starting');
+});

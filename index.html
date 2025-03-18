@@ -1,10 +1,28 @@
-<!doctype html>
-<html>
-    <head>
-        <title>Hallo Welt</title>
-    </head>
-    <body>
-        <h1>Greeting</h1>
-        <p>Viel Spass!</p>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+   <input id="idInput" type = "text">
+   <button onclick="sendRequest()">Senden</button>
+<p  id="result"></p>
+</body>
+<script>
+    async function sendRequest() {
+        const idInput = document.getElementById('idInput').value;
+        const response = await fetch('/api/getUserById?id=' + idInput );
+
+        if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const json = await response.json();
+    document.getElementById('result').innerHTML = JSON.stringify(json);
+    }
+    
+</script>
 </html>
